@@ -17,4 +17,5 @@ for i in range(user_num):
             count=count+1
         #end if
     #end if
+#next i
 print("The factors are :" + str(factors))
