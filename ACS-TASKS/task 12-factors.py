@@ -1,6 +1,8 @@
 #user inputs number
 count = 0
 user_num=int(input("Please enter a number to see their factors : "))
+#makes an empty array to store factors
+factors = []
 #checks if every number up to user_num is a factor
 for i in range(user_num):
     if user_num % (i +1)== 0:
@@ -11,7 +13,8 @@ for i in range(user_num):
                 print("This number has no factors")
             #end if
         else :
-            print(i+1)
+            factors.append(i+1)
             count=count+1
         #end if
     #end if
+print("The factors are :" + str(factors))
