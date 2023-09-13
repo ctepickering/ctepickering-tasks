@@ -8,4 +8,4 @@ words=sentence.split()
 numwords=len(words)
 
 #outputs back to user
-print(numwords)
+print("There are " + str(numwords) + " words")
