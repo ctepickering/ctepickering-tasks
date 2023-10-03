@@ -1,7 +1,3 @@
-            print(f'Frame {frame}:')
-            shot_one = int(input('how many pins on first shot:'))
-            if shot_one == POINTS_FOR_STRIKE:
-                # this is a strike
 #bowling game
 scores=[]
 for turns in range(10):
