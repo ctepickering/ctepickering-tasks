@@ -1,5 +1,5 @@
 import pygame
-
+import math
 # Define some colors
 BLACK    = (   0,   0,   0)
 WHITE    = ( 255, 255, 255)
@@ -22,6 +22,7 @@ yval = 200
 multi= 0.9
 colour=SKY
 sun=YELLOW
+moon=YELLOW
 count=1
 # -------- Main Program Loop -----------
 while not done:
@@ -38,6 +39,7 @@ while not done:
         if count%2 !=0:
             colour=BLACK
             sun = WHITE
+            moon = BLACK
             pygame.draw.ellipse(screen,WHITE,[10,40,5,5])
             pygame.draw.ellipse(screen,WHITE,[300,20,5,5])
             count = count +1
@@ -45,6 +47,7 @@ while not done:
         else:
             colour=SKY
             sun=YELLOW
+            moon=YELLOW
             count =count+1
         #endif
     elif xval> 310 :
@@ -58,6 +61,7 @@ while not done:
     screen.fill(colour)
     # --- Drawing code should go here
     pygame.draw.ellipse(screen,sun,[xval,yval,70,70])
+    pygame.draw.ellipse(screen,moon,[xval,yval,50,50])
 
     pygame.draw.rect(screen,GREEN,[0,300,700,200])
     pygame.draw.rect(screen,BLUE,[250,220,200,200])
