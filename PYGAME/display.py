@@ -45,6 +45,7 @@ while not done:
         else:
             colour=SKY
             sun=YELLOW
+            count =count+1
         #endif
     elif xval> 310 :
         yval=yval+0.5
