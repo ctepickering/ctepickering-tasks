@@ -1,5 +1,6 @@
 import pygame
 import math
+import random
 # Define some colors
 BLACK    = (   0,   0,   0)
 WHITE    = ( 255, 255, 255)
@@ -62,20 +63,29 @@ while not done:
     # --- Drawing code should go here
     pygame.draw.ellipse(screen,sun,[xval,yval,70,70])
     pygame.draw.ellipse(screen,moon,[xval,yval,50,50])
+    for i in range(50):
+        x = random.randrange(0, 700)
+        y = random.randrange(0, 500)
+        pygame.draw.circle(screen, WHITE, [x, y], 2)
 
-    pygame.draw.rect(screen,GREEN,[0,300,700,200])
+    pygame.draw.rect(screen,WHITE,[0,300,700,200])
     pygame.draw.rect(screen,BLUE,[250,220,200,200])
     pygame.draw.polygon(screen, BROWN, [[350,150], [200,240], [500,240]])
+    pygame.draw.polygon(screen, WHITE, [[350,150], [210,220], [490,220]])
     pygame.draw.rect(screen,WHITE,[275,250,50,60])
     pygame.draw.rect(screen,WHITE,[375,250,50,60])
     pygame.draw.rect(screen,BLACK,[275,250,50,60], 3)
     pygame.draw.rect(screen,BLACK,[375,250,50,60], 3)
     pygame.draw.rect(screen,BROWN,[325,350,50,70])
     pygame.draw.rect(screen,BLACK,[325,350,50,70], 3)
+    for i in range(50):
+        x = random.randrange(0, 700)
+        y = random.randrange(0, 500)
+        pygame.draw.circle(screen, WHITE, [x, y], 2)
     # --- Go ahead and update the screen with what we've drawn.
     pygame.display.flip()
  
     # --- Limit to 60 frames per second
-    clock.tick(60)
+    clock.tick(20)
     #next
 #endwhile
