@@ -63,10 +63,13 @@ while done == False:
 
     
     # Move the rectangle starting point
-    if y_change > 0 :
-        follow_y = rect_y -60
-    else :
-       follow_y = rect_y +60 
+    key=pygame.key.get_pressed()
+    if key[pygame.K_UP]:
+        user_y=user_y-5
+    elif key[pygame.K_DOWN]:
+        user_y=user_y+5
+    #endif
+    
     rect_x = rect_x + x_change
     rect_y = rect_y + y_change
     if rect_y > 480 or rect_y < 0:
