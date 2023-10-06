@@ -46,6 +46,11 @@ y_change = 5
 follow_change = 3
 clock = pygame.time.Clock()
 random1=blue
+#font = pygame.font.SysFont("Calibri", 25, True, False)
+#text = font.render("GAME OVER",True,black)
+ 
+# Put the image of the text on the screen at 250x250
+#screen.blit(text, [250, 250])
 # -------- Main Program Loop -----------
 while done == False:
 
@@ -58,9 +63,8 @@ while done == False:
     # Draw the rectangle
     pygame.draw.rect(screen, white, [rect_x, rect_y, 20, 20])
     pygame.draw.rect(screen, black, [rect_x, rect_y, 20, 20], 2)
-    pygame.draw.rect(screen, black, [20, user_y, 20, 120])
-    pygame.draw.rect(screen, black, [760, follow_y, 20, 120])
-
+    player=pygame.draw.rect(screen, black, [20, user_y, 20, 120])
+    pygame.draw.rect(screen, black, [760, user_y, 20, 120])
     
     # Move the rectangle starting point
     key=pygame.key.get_pressed()
@@ -72,12 +76,16 @@ while done == False:
     
     rect_x = rect_x + x_change
     rect_y = rect_y + y_change
+    if rect_x==40 or rect_x ==740 :
+        if ((user_y > rect_y and user_y < (rect_y + 120))or ((user_y + 120) > rect_y and (user_y + 120) < (rect_y + 120))):
+            x_change = x_change * -1
+            random1= random.choice(colours)
     if rect_y > 480 or rect_y < 0:
         y_change = y_change * -1
         random1= random.choice(colours)
-    elif rect_x > 780 or rect_x <0:
-        x_change = x_change * -1
-        random1= random.choice(colours)
+    #elif rect_x > 780 or rect_x <0:
+        #Put the image of the text on the screen at 250x250
+        #screen.blit(text, [250, 250])
     pygame.display.flip()
 
     clock.tick(60)
