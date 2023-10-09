@@ -57,6 +57,7 @@ random1=blue
 #sets number of lives
 lives=5
 end = ""
+score=0
 # -------- Main Program Loop -----------
 while done == False:
 
@@ -75,6 +76,12 @@ while done == False:
     text = font.render("Lives : " +str(lives), True, black) 
     # Put the image of the text on the screen at 250x250
     screen.blit(text, [315,10])
+
+    # Select the font to use, size, bold, italics
+    font2 = pygame.font.SysFont('Calibri', 25, True, False)
+    text2 = font2.render("Score : " +str(score), True, black) 
+    # Put the image of the text on the screen at 250x250
+    screen.blit(text2, [10,10])
 
     endmessage = font.render(end, True, black)
     screen.blit(endmessage, [270,100])
@@ -96,6 +103,7 @@ while done == False:
     if rect_x==40 or rect_x ==740 :
         if ((user_y > rect_y and user_y < (rect_y + 120))or ((user_y + 120) > rect_y and (user_y + 120) < (rect_y + 120))):
             x_change = x_change * -1
+            score =score+1
             random1= random.choice(colours)
     #to bounce off side wall
     if rect_y > 480 or rect_y < 0:
