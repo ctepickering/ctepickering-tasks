@@ -33,6 +33,8 @@ coffee_brown =((200,190,140))
 moon_glow = ((235,245,255))
 colours = [blue,green,red,yellow,purple,pink,orange,blue_green]
 
+block_xsize1=120
+block_xsize2=120
 #screen dimensions
 size = (800, 500)
 #defines screen
@@ -46,16 +48,18 @@ pygame.display.set_caption("Pong by Charlie")
 rect_x = 380
 rect_y = 230
 
+user_y2=190
 user_y = 190
 follow_y=190
 # Speed and direction of rectangle
-x_change = 5
-y_change = 5
+x_change = 5 or 10
+y_change = 4
 follow_change = 3
 #starting background colour
 random1=blue
 #sets number of lives
-lives=5
+lives=0
+lives2=0
 end = ""
 score=0
 # -------- Main Program Loop -----------
@@ -73,21 +77,20 @@ while done == False:
 
     # Select the font to use, size, bold, italics
     font = pygame.font.SysFont('Calibri', 50, True, False)
-    text = font.render("Lives : " +str(lives), True, black) 
-    # Put the image of the text on the screen at 250x250
-    screen.blit(text, [315,10])
+    text = font.render(str(lives2), True, black) 
+   
+    screen.blit(text, [590,10])
+    font2 = pygame.font.SysFont('Calibri', 50, True, False)
+    text2 = font2.render(str(lives), True, black) 
+    
+    screen.blit(text2, [190,10])
 
-    # Select the font to use, size, bold, italics
-    font2 = pygame.font.SysFont('Calibri', 25, True, False)
-    text2 = font2.render("Score : " +str(score), True, black) 
-    # Put the image of the text on the screen at 250x250
-    screen.blit(text2, [10,10])
-
+    #displays winner at end
     endmessage = font.render(end, True, black)
-    screen.blit(endmessage, [270,100])
+    screen.blit(endmessage, [230,100])
     #draw the barriers
-    player=pygame.draw.rect(screen, black, [20, user_y, 20, 120])
-    pygame.draw.rect(screen, black, [760, user_y, 20, 120])
+    player=pygame.draw.rect(screen, black, [20, user_y2, 20, block_xsize1])
+    pygame.draw.rect(screen, black, [760, user_y, 20, block_xsize2])
     
     # Move barriers
     key=pygame.key.get_pressed()
@@ -96,12 +99,18 @@ while done == False:
     elif key[pygame.K_DOWN]:
         user_y=user_y+5
     #endif
+    key2=pygame.key.get_pressed()
+    if key2[pygame.K_w]:
+        user_y2=user_y2-5
+    elif key2[pygame.K_s]:
+        user_y2=user_y2+5
+    #endif
     
     rect_x = rect_x + x_change
     rect_y = rect_y + y_change
     #to bounce off barriers
-    if rect_x==40 or rect_x ==740 :
-        if ((user_y > rect_y and user_y < (rect_y + 120))or ((user_y + 120) > rect_y and (user_y + 120) < (rect_y + 120))):
+    if rect_x==40 or rect_x==740 :
+        if rect_y >= user_y2  and rect_y <= user_y2 + block_xsize1 or rect_y >= user_y  and rect_y <= user_y + block_xsize2:
             x_change = x_change * -1
             score =score+1
             random1= random.choice(colours)
@@ -109,19 +118,29 @@ while done == False:
     if rect_y > 480 or rect_y < 0:
         y_change = y_change * -1
         random1= random.choice(colours)
-    elif rect_x > 780 or rect_x <0:
-       rect_x = 380
-       rect_y = 230 
-       lives = lives-1
+    elif rect_x > 780 :
+       rect_x = 40
+       rect_y = user_y+40 
+       lives = lives+1
+    elif rect_x <0:
+        rect_x = 740
+        rect_y = user_y2+40
+        lives2 = lives2+1
     pygame.display.flip()
     #ends after 5 lives have been used
-    if lives == 0:
+    if lives == 5:
         rect_x = 380
         rect_y = 230
         x_change=0
         y_change=0
-        end = "GAME OVER"
-
+        end = "Left player wins!"
+    elif lives2 == 5:
+        rect_x = 380
+        rect_y = 230
+        x_change=0
+        y_change=0
+        end = "Right player wins!"
+        random1=white
     #end if
     clock.tick(60)
 #end while
