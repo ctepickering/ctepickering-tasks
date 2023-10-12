@@ -35,15 +35,16 @@ size = (800, 500)
 screen = pygame.display.set_mode(size)
 
 # Snowflake class
-class Snowflake:
+class Snow:
+    #constructor function
     def __init__(self):
         self.x = random.randint(0, 800)
         self.y = random.randint(0, 500)
         self.size = random.randint(1, 4)
         self.speed = random.randint(1, 5)
         self.speed2=random.randint(-2,2)
-
-    def move(self):
+    #end of con func
+    def update(self):
         self.y += self.speed
         self.x +=self.speed2
         if self.y > 500:
@@ -57,11 +58,9 @@ class Snowflake:
 #-Global Varaibles
 done=False
 colours = [blue,green,red,purple,pink,orange,blue_green]
-snow_group=pygame.sprite.Group()
-number_of_flakes=250
-# Create snowflakes
-snowflakes = [Snowflake() for _ in range(number_of_flakes)]
 
+number_of_flakes=250
+snowflakes = [Snow() for _ in range(number_of_flakes)]
 
 clock = pygame.time.Clock()
 
@@ -76,10 +75,10 @@ while done == False:
     screen.fill(navy_blue)
 
     #draw 
-
-    for snowflake in snowflakes:
-        snowflake.move()
-        snowflake.draw(screen)
+    
+    for flake in snowflakes:
+        flake.update()
+        flake.draw(screen)
 
     #game logic
 
