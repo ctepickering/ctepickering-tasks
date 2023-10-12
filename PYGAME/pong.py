@@ -52,9 +52,9 @@ user_y2=190
 user_y = 190
 follow_y=190
 # Speed and direction of rectangle
-x_change = 5 or 10
+x_change = 10
 y_change = 4
-follow_change = 3
+
 #starting background colour
 random1=blue
 #sets number of lives
