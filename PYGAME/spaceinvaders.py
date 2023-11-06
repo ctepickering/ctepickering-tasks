@@ -42,14 +42,14 @@ screen = pygame.display.set_mode(size)
 # Snowflake class
 class invader(pygame.sprite.Sprite):
     #constructor function
-    def __init__(self):
-        self.size_x = 30
-        self.size_y =30
+    def __init__(self,in_width,in_height):
+        self.size_x = in_width
+        self.size_y =in_height
         self.image = pygame.Surface([self.size_x, self.size_y])
         self.rect=self.image.get_rect()
+        self.image.fill(red)
         self.rect.x = random.randint(0, 800)
         self.rect.y = random.randint(-50,0)
-        self.size = 20
         self.speed = 1
         self.speed2=0
     #end of con func
@@ -57,30 +57,31 @@ class invader(pygame.sprite.Sprite):
         self.rect.y += self.speed
         self.rect.x +=self.speed2
         if self.rect.y > 500:
-            self.rect.y = -self.size
+            self.rect.y = random.randint(-50,0)
             self.rect.x = random.randint(0, 800)
-
-    def draw(self, screen):
-        pygame.draw.rect(screen, blue , [self.rect.x, self.rect.y, self.size_x,self.size_y])
 #end of class snow
 
 class Player(pygame.sprite.Sprite) :
-    def __init__(self):
-        self.size_x = 20
-        self.size_y =20
-        self.image = pygame.Surface([self.size_x, self.size_y])
-        self.rect=self.image.get_rect()
-        self.rect.x = 390
+    def __init__(self, p_width, p_length, initial_x):
+        super().__init__()
+        self.width = p_width
+        self.height = p_length
+        self.image = pygame.Surface([self.width, self.height])
+        self.image.fill(dandilion_yellow), 
+        self.rect = self.image.get_rect()
+        self.rect.x = initial_x
         self.rect.y = 470
-        self.speed = 5
-        self.lives = 5
+        self.speed=5
     def update(self):
         key=pygame.key.get_pressed()
         if key[pygame.K_LEFT]:
             self.rect.x= self.rect.x-self.speed
         elif key[pygame.K_RIGHT]:
             self.rect.x= self.rect.x+self.speed
-        pygame.draw.rect(screen, dandilion_yellow , [self.rect.x, self.rect.y, self.size_x,self.size_y])
+        if self.rect.left < 0:
+            self.rect.left = 0
+        if self.rect.right > 800:
+            self.rect.right = 800
 
 class Bullet(pygame.sprite.Sprite) :
     def __init__(self):
@@ -93,29 +94,29 @@ class Bullet(pygame.sprite.Sprite) :
         self.speed = 0
         self.color = black
     def update(self):
-        key=pygame.key.get_pressed()
-        self.rect.y = self.rect.y-self.speed
+        self.rect.y = self.rect.y-3
         pygame.draw.rect(screen, self.color , [self.rect.x,self.rect.y,2,5])
-        if key[pygame.K_SPACE]:
-            if self.rect.y >-10:
-                self.speed = 5
-                self.color =white
-            #next i
-        #end if
+
+
+#create sprite groups
+all_sprites = pygame.sprite.Group()
+bullets = pygame.sprite.Group()
+invader_sprites = pygame.sprite.Group()
+player_sprite = pygame.sprite.Group()
+
 
 #-Global Varaibles
 done=False
 colours = [blue,green,red,purple,pink,orange,blue_green]
 
 number_of_invaders=10
-invaders = [invader() for _ in range(number_of_invaders)]
-player= Player()
-clock = pygame.time.Clock()
-bullet=Bullet()
+for i in range(number_of_invaders) :
+    enemy = invader(30,30)
+    invader_sprites.add(enemy)
+player= Player(20,20,390)
 
-#creates a list of the invaders
-invader_group=pygame.sprite.Group()
-all_sprites_group=pygame.sprite.Group()
+clock = pygame.time.Clock()
+
 
 # -------- Main Program Loop -----------
 while done == False:
@@ -123,8 +124,10 @@ while done == False:
     for event in pygame.event.get(): # User did something
         if event.type == pygame.QUIT: # If user clicked close
             done = True # Flag that we are done so we exit this loop
-        #creates a list of the invaders
-        invader_group=pygame.sprite.Group()
+        
+        bullet=Bullet()
+        bullets.add(bullet)
+        all_sprites.add(bullet)
          
  
     # Set the screen background
@@ -135,12 +138,10 @@ while done == False:
     text = font.render("Lives : "+str(player.lives), True, white) 
    
     screen.blit(text, [700,10])
-    
+
     player.update()
     bullet.update()
-    for enemy in invaders:
-        enemy.update()
-        enemy.draw(screen)
+    invader_sprites.update()
 
     #game logic
     player_hit_group=pygame.sprite.spritecollide(player,invader_group,True)

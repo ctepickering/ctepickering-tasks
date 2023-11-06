@@ -1,9 +1,10 @@
-q=["" for _ in range(6)]
-size = 0
 maxSize = 6
+q=["" for _ in range(maxSize)]
+size = 0
 maxItems=6
-rear = 0 
+rear = -1
 front = 0
+
 def isEmpty() :
     if size == 0 :
         return True
