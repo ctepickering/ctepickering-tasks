@@ -43,6 +43,8 @@ size = (screen_x, screen_y)
 screen = pygame.display.set_mode(size)
 pygame.display.set_caption("Space Invaders")
 
+clock = pygame.time.Clock()
+
 # Loop until the user clicks the close button.
 done = False
  
