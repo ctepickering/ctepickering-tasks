@@ -1,7 +1,5 @@
 import pygame
-import math
 import random
-import time
 
 
 
@@ -26,18 +24,14 @@ PINK = ((255,100,180))
 PURPLE = ((240,0,255))
 GREY = ((127,127,127))
 MAGENTA = ((255,0,230))
-brown = ((100,40,0))
-forest_green = ((0,50,0))
-navy_blue = ((0,0,100))
-rust = ((210,150,75))
+BROWN = ((100,40,0))
+FOREST_GREEN = ((0,50,0))
+NAVY_BLUE= ((0,0,100))
+RUST = ((210,150,75))
 DANDILION_YELLOW = ((255,200,0))
-highlighter = ((255,255,100))
-sky_blue = ((0,255,255))
-light_gray = ((200,200,200))
-dark_gray = ((50,50,50))
-tan = ((230,220,170))
-coffee_brown =((200,190,140))
-moon_glow = ((235,245,255))
+HIGHLIGHTER = ((255,255,100))
+SKY_BLUE = ((0,255,255))
+MOONGLOW = ((235,245,255))
 
 #lives = 5
 end = ""
