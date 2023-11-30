@@ -55,7 +55,6 @@ class Block(pygame.sprite.Sprite):
 class Player(pygame.sprite.Sprite):
     def __init__(self, s_width, s_length, initial_x):
         super().__init__()
-        self.x_val2 = x_val
         self.width = s_width
         self.height = s_length
         self.image = pygame.Surface([self.width, self.height])
@@ -63,20 +62,26 @@ class Player(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = initial_x
         self.rect.y = 465
+        self.x_change=1
+        self.y_change=1
 
     
 
     def update(self):
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
-            self.rect.x -= 5
+            self.rect.x = -5
         if keys[pygame.K_RIGHT]:
+            self.rect.x += 5
+        if keys[pygame.K_UP]:
+            self.rect.x -= 5
+        if keys[pygame.K_DOWN]:
             self.rect.x += 5
 
         if self.rect.left < 0:
             self.rect.left = 0
-        if self.rect.right > 700:
-            self.rect.right = 700
+        if self.rect.right > 100:
+            self.rect.right = 00
 
 map =[[1,1,1,1,1,1,1,1,1,1], 
     [1,0,0,1,0,0,0,0,0,1],
@@ -115,7 +120,8 @@ while done == False:
         screen.fill(BLACK)
         #draw 
         wall_list.draw(screen)
-   
+        Player.draw(screen)
+        update()
 
         #game logic
 
