@@ -50,8 +50,6 @@ for c in myString :
     s.push(c)
 while not s.isEmpty():
     palList.append(s.pop)
-
-print(''.join(palList))
 if myString ==''.join(palList):
     print("IS palindrome")
 else:
