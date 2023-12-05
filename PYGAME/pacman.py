@@ -33,11 +33,11 @@ MOONGLOW = ((235,245,255))
 done = False
 clock = pygame.time.Clock()
 
-screen_x =200
-screen_y = 200
+screen_x =420
+screen_y = 420
 size = (screen_x, screen_y)
 screen = pygame.display.set_mode(size)
-pygame.display.set_caption("PacMan?")
+pygame.display.set_caption("Yellow Ball vs Ghosts")
 
 ##--Definetheclasstilewhichisasprite
 class Block(pygame.sprite.Sprite):
@@ -48,51 +48,64 @@ class Block(pygame.sprite.Sprite):
         #Create a sprite and fill it with colour
         self.image=pygame.Surface([width,height])
         self.image.fill(colour)
-        self.rect=self.image.get_rect()#Set theposition of the player attributes
+        self.rect=self.image.get_rect()#Set the position of the player attributes
         self.rect.x=x_ref
         self.rect.y=y_ref
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self, s_width, s_length, initial_x):
+    def __init__(self, s_width, s_length):
         super().__init__()
         self.width = s_width
         self.height = s_length
         self.image = pygame.Surface([self.width, self.height])
         self.image.fill(YELLOW), 
         self.rect = self.image.get_rect()
-        self.rect.x = initial_x
-        self.rect.y = 465
-        self.x_change=1
-        self.y_change=1
+        self.rect.x = 20
+        self.rect.y = 20
+        self.x_change=0
+        self.y_change=0
 
     
 
     def update(self):
         keys = pygame.key.get_pressed()
+        self.rect.x= self.rect.x+self.x_change
+        self.rect.y= self.rect.y+self.y_change
+        # makes player continue to move in this direction once keys pressed
         if keys[pygame.K_LEFT]:
-            self.rect.x = -5
+            self.x_change = -1
+            self.y_change_change = 0
         if keys[pygame.K_RIGHT]:
-            self.rect.x += 5
+            self.x_change = 1
+            self.y_change_change = 0
         if keys[pygame.K_UP]:
-            self.rect.x -= 5
+            self.y_change_change = -1
+            self.x_change = 0
         if keys[pygame.K_DOWN]:
-            self.rect.x += 5
+            self.x_change = 1
+            self.x_change = 0
 
-        if self.rect.left < 0:
-            self.rect.left = 0
-        if self.rect.right > 100:
-            self.rect.right = 00
-
-map =[[1,1,1,1,1,1,1,1,1,1], 
-    [1,0,0,1,0,0,0,0,0,1],
-    [1,0,0,0,0,0,0,1,0,1],
-    [1,1,0,1,1,1,1,0,0,1], 
-    [1,0,0,0,0,0,1,1,0,1],
-    [1,0,1,1,1,0,1,0,0,1],
-    [1,0,0,0,1,0,1,1,0,1], 
-    [1,0,1,1,1,0,1,0,0,1], 
-    [1,0,0,0,0,0,0,0,1,1], 
-    [1,1,1,1,1,1,1,1,1,1]]
+map =[[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1], 
+    [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+    [1,0,1,1,1,1,0,1,0,1,1,0,0,0,1,1,1,1,0,0,1],
+    [1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1],
+    [1,0,1,0,0,0,1,1,0,1,1,0,0,0,1,0,0,1,0,0,1],
+    [1,0,1,0,0,0,1,0,0,0,0,0,1,1,1,0,0,1,0,0,1],
+    [1,0,0,0,0,0,1,1,0,1,1,0,0,0,1,0,0,0,0,0,1], 
+    [1,0,0,0,0,0,1,0,0,0,0,0,1,1,1,0,0,0,0,0,1],
+    [1,0,0,0,0,0,1,0,0,0,0,0,1,1,1,0,0,0,0,0,1], 
+    [1,0,1,1,1,1,0,0,1,0,0,0,1,1,1,0,0,0,0,0,1], 
+    [1,0,0,0,0,1,1,0,0,1,1,0,0,0,1,0,0,1,0,0,1],
+    [1,0,1,1,1,1,0,0,0,1,0,0,1,1,1,0,0,0,0,0,1],
+    [1,0,0,0,0,0,0,1,0,1,1,0,0,0,1,0,0,1,0,0,1],
+    [1,0,0,1,1,1,1,0,0,0,1,0,0,0,1,0,0,1,0,0,1],
+    [1,0,0,0,0,0,1,1,0,1,1,0,0,0,1,0,0,1,0,0,1],
+    [1,0,1,0,0,0,1,0,0,0,0,0,1,1,1,0,0,1,0,0,1],
+    [1,0,1,0,0,0,1,1,0,1,1,0,0,0,1,0,0,1,0,0,1], 
+    [1,0,1,0,0,0,1,0,0,0,0,0,1,1,1,0,0,1,0,0,1], 
+    [1,0,1,1,1,1,0,0,0,0,0,0,0,0,1,1,1,1,0,0,1], 
+    [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]]
 
 
 #Create a list of all sprites
@@ -100,11 +113,14 @@ all_sprites_list=pygame.sprite.Group()
 
 #Create a list of tiles for the walls
 wall_list=pygame.sprite.Group()
-
+player_list=pygame.sprite.Group()
+player1=Player(19,19)
+player_list.add(player1)
+all_sprites_list.add(player1)
 #Create walls on the screen (each tile is 20x20 so alter cords)
-for y in range(10):
-    for x in range(10):
-        if map[x][y]==1:
+for y in range(21):
+    for x in range(21):
+        if map[y][x]==1:
             my_wall=Block(BLUE,20,20,(x*20),(y*20))
             wall_list.add(my_wall)
             all_sprites_list.add(my_wall)
@@ -119,10 +135,8 @@ while done == False:
         # Set the screen background
         screen.fill(BLACK)
         #draw 
-        wall_list.draw(screen)
-        Player.draw(screen)
-        update()
-
+        all_sprites_list.draw(screen)
+        all_sprites_list.update()
         #game logic
 
         pygame.display.flip()
