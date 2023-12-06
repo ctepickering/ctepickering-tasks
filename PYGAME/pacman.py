@@ -60,8 +60,8 @@ class Player(pygame.sprite.Sprite):
         self.image = pygame.Surface([self.width, self.height])
         self.image.fill(YELLOW), 
         self.rect = self.image.get_rect()
-        self.rect.x = 20
-        self.rect.y = 20
+        self.rect.x = 21
+        self.rect.y = 21
         self.x_change=0
         self.y_change=0
 
@@ -114,7 +114,7 @@ all_sprites_list=pygame.sprite.Group()
 #Create a list of tiles for the walls
 wall_list=pygame.sprite.Group()
 player_list=pygame.sprite.Group()
-player1=Player(19,19)
+player1=Player(18,18)
 player_list.add(player1)
 all_sprites_list.add(player1)
 #Create walls on the screen (each tile is 20x20 so alter cords)
