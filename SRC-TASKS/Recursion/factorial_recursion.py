@@ -6,4 +6,4 @@ def fac(n) :
     #end if
 #end function
 
-print(fac(5))
+print(fac(996))
