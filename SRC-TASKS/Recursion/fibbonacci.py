@@ -5,4 +5,4 @@ def fibbonacci(n):
         return 1
     return fibbonacci(n-1) + fibbonacci(n-2)
 #endfunc
-fibbonacci(100)
+print(fibbonacci(4))
