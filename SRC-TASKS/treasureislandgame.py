@@ -20,8 +20,17 @@ class Treasure:
         self.__level = newLevel
     #end procedure
 #end class
+
+class Board:
+        def __init__(self, value:int, level:str) -> None:
+            pass
+    #end constructor
+
+    
+#end class
         
 gold_cup = Treasure(500,"Gold")
+gold_chest = Treasure(1000,"Gold")
 
 gold_cup.__value = 300
 print(gold_cup._Treasure__value,gold_cup._Treasure__level)
